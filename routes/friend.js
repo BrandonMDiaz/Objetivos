@@ -1,9 +1,8 @@
 const {Router} = require('express');
 const router = Router();
 
-router.get('/:userId');
+
 router.post('/');
-router.put('/:userId');
-router.delete('/:userId');
+router.delete('/:friendId');
 
 module.exports = router;

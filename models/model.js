@@ -42,7 +42,25 @@ class Model{
             throw err;
         }
     }
-
+    async update(){
+        let dataToBeUpdated = this.#getModelData();
+        try {
+            const dataUpdated = await db.update(dataToBeUpdated, this.tableName);
+            return dataUpdated;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    static async delete(id){
+        try{
+            const itemDeleted = await db.delete(id,this.tableName);
+            return true;
+        }
+        catch(err){
+            throw err;
+        }
+    }
     /**
      * Private function that returns model properties to be saved
      * 

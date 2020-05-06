@@ -97,7 +97,50 @@ class DB{
         })
         return promise;
     }
-    
+
+    /**
+     * returns updated item
+     * 
+     * @param {Object}  obj 
+     * @param {string} table 
+     * @return Promise   
+     */
+    async update(obj, table){
+        const query = `UPDATE ${table} SET ?? WHERE id = ?`;
+        const promise = new Promise((resolve,reject) => {
+            this.con.query(query, [obj, obj.id], (err,res,fields) => {
+                if(err){
+                    console.error('Hubo error al hacer update');
+                    console.error(err);
+                    return reject(err);
+                }
+                console.log(res)
+                console.log(fields)
+                return resolve(res);
+            });
+        })
+        return promise;
+    }
+
+    /**
+     * 
+     * @param {number} id id of the data to be deleted 
+     * @param {string} table name of the table you are willing to use
+     * @return {Promise} regresa una promesa
+     */
+    async delete(id, table){
+    const query = `DELETE FROM ${table} WHERE id = ?`
+    const promise = new Promise((resolve,reject) => {
+        this.con.query(query,[id], (err,res) => {
+            if (err){
+                return reject(err)
+            }
+            return resolve(res.affectedRows)
+        });
+    });
+    return promise;  
+    }
+
     // async createTable(data){
     //     const query = {
     //         sql: 

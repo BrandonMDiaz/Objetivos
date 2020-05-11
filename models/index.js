@@ -1,4 +1,8 @@
-
-exports.User = require('./users')
+exports.ActividadModel = require('./actividad')
+exports.UserModel = require('./users')
 exports.ObjetivoModel = require('./objetivo')
 exports.MetaModel = require('./meta')
+exports.AgendaModel = require('./agenda')
+exports.CategoriaModel = require('./categoria')
+exports.FriendModel = require('./friend')
+exports.PublicacionModel = require('./publicacion')

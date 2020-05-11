@@ -19,6 +19,12 @@ class DB{
             console.log('Conectado con exito a DB')
         });
     }
+
+    /**
+     * 
+     * @param {string} table the name of the table witch it will be retrieving the data
+     * @return {Promise} promise
+     */
     async getAll(table){
         const query = `SELECT * FROM ${table}` ;
         let resultado = new Promise((resolve, reject) => {
@@ -32,6 +38,11 @@ class DB{
         
         return resultado;
     }
+    /**
+     * 
+     * @param {number} id 
+     * @param {string} table 
+     */
     async get(id,table){
         const query = `SELECT * FROM ${table} WHERE id = ?` ;
         let resultado = new Promise((resolve, reject) => {

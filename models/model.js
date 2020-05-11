@@ -6,7 +6,7 @@ class Model{
     }
     
     static async tableName(){
-        return this.tableName = this.constructor.name;
+        return this.constructor.name;
     }
 
     static async getAll(){
@@ -31,7 +31,6 @@ class Model{
         }
     }
     
-
     async save(){
         let dataToBeSaved = this.#getModelData();
         try{

@@ -1,5 +1,5 @@
 exports.ActividadModel = require('./actividad')
-exports.UserModel = require('./users')
+exports.UsuarioModel = require('./users')
 exports.ObjetivoModel = require('./objetivo')
 exports.MetaModel = require('./meta')
 exports.AgendaModel = require('./agenda')

@@ -1,4 +1,4 @@
-const ErrorController = require('../controllers/errors');
+// const ErrorController = require('../controllers/errors');
 let mysql = require('mysql');
 
 class DB{
@@ -7,7 +7,7 @@ class DB{
             host     : process.env.DB_HOST,
             user     : process.env.DB_USER,
             password : process.env.DB_PASS,
-            database: "objetivos2",
+            database: "planit",
             timezone: 'utc',
           });
         
@@ -25,7 +25,7 @@ class DB{
      * @param {string} table the name of the table witch it will be retrieving the data
      * @return {Promise} promise
      */
-    async getAll(table){
+    getAll(table){
         const query = `SELECT * FROM ${table}` ;
         let resultado = new Promise((resolve, reject) => {
             this.con.query(query, (err,res,fields) => {
@@ -33,8 +33,8 @@ class DB{
                 return reject(err)
             }
             return resolve(res);
-            })
-        })
+            });
+        });
         
         return resultado;
     }

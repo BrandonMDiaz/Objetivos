@@ -1,6 +1,6 @@
 const {ActividadModel} = require('../models/index');
 const Validator = require('./validator');
-const Response = require('.responsesController')
+const Response = require('./responsesController')
 
 class ActividadController{
     constructor(){
@@ -15,7 +15,7 @@ class ActividadController{
     }   
 
     get(req,res){
-
+        
     }
 
     post(req,res){
@@ -30,3 +30,5 @@ class ActividadController{
 
     }
 }
+
+module.exports = new ActividadController();

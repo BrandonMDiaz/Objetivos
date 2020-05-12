@@ -1,19 +1,17 @@
-const database = require('../db/index')
+const db = require('../db/index')
 
 class Model{
     constructor(){
-        this.tableName = this.constructor.name;
     }
     
-    static async tableName(){
-        return this.constructor.name;
-    }
+    // tableName(){
+    //     return this.name;
+    // }
 
     static async getAll(){
-        
+        let tableName = this.name;
         try{
-            console.log(this.tableName())
-            const data = await db.getAll(this.tableName);
+            const data = await db.getAll(tableName);
             return data;
         }
         catch(err){
@@ -22,8 +20,10 @@ class Model{
     }   
 
     static async find(id){
+        let tableName = this.name;
         try{
-            const data = await db.get(id, this.tableName);
+            console.log(id);
+            const data = await db.get(id, tableName);
             return data;
         }
         catch(err){
@@ -32,9 +32,10 @@ class Model{
     }
     
     async save(){
-        let dataToBeSaved = this.#getModelData();
+        let dataToBeSaved = this.getModelData();
+        let tableName = this.constructor.name;
         try{
-            const dataSaved = await db.save(dataToBeSaved, this.tableName);
+            const dataSaved = await db.save(dataToBeSaved, tableName);
             return dataSaved;
         }
         catch(err){
@@ -42,7 +43,7 @@ class Model{
         }
     }
     async update(){
-        let dataToBeUpdated = this.#getModelData();
+        let dataToBeUpdated = this.getModelData();
         try {
             const dataUpdated = await db.update(dataToBeUpdated, this.tableName);
             return dataUpdated;
@@ -65,7 +66,7 @@ class Model{
      * 
      * @return object
      */
-    #getModelData(){
+    getModelData(){
         let data = this;
         delete data.tableName;
         return data;

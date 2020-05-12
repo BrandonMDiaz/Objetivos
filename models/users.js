@@ -1,30 +1,9 @@
-const database = require('../db/index')
+const Model  = require('./model');
 
-class User{
+class Usuario extends Model{
     constructor(){
-
-    }
-
-    async getAll(){
-        return await database.getAll('users');
-    }
-
-    async get(data){
-        
-        return await database.get('users');
-    }
-
-    async save(data){
-
-    }
-
-    async update(){
-
-    }
-
-    async delete(){
-
+        super()
     }
 }
 
-module.exports = User;
+module.exports = Usuario;

@@ -1,4 +1,4 @@
-const { Model } = require('./model');
+const Model  = require('./model');
 
 class Agendas extends Model{
     

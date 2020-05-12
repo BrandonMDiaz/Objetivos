@@ -1,4 +1,5 @@
 const {Router} = require('express');
+const {usuarioController} = require('../controllers/index')
 const router = Router();
 
 //friends route 
@@ -16,7 +17,7 @@ router.get('/:userId/agenda/:agendaId');
 //users
 router.get('/:userId');
 router.get('/');
-router.post('/');
+router.post('/', usuarioController.post);
 router.put('/:userId');
 router.delete('/:userId');
 

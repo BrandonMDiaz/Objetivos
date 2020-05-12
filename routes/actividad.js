@@ -1,10 +1,11 @@
 const {Router} = require('express');
+const {actividadController} = require('../controllers/index')
 const router = Router();
 
 /**
  * Returns all actividades
  */
-router.get('/'); 
+router.get('/', actividadController.getAll); 
 /**
  * returns one meta
  */

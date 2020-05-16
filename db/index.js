@@ -1,6 +1,6 @@
 // const ErrorController = require('../controllers/errors');
 let mysql = require('mysql');
-
+let QueryBuilder = require('./queryBuilder')
 class DB{
     constructor(){
         this.con = mysql.createConnection({
@@ -18,6 +18,24 @@ class DB{
             }
             console.log('Conectado con exito a DB')
         });
+    }
+
+    /**
+     * 
+     * @param {string} query query que quieres ejecutar
+     * @return {Promise}
+     */
+    rawQuery(query){
+        let resultado = new Promise((resolve, reject) => {
+            this.con.query(query, (err,res) => {
+            if(err){
+                return reject(err)
+            }
+            return resolve(res);
+            });
+        });
+        
+        return resultado;
     }
 
     /**
@@ -43,10 +61,12 @@ class DB{
      * @param {number} id 
      * @param {string} table 
      */
-    async get(id,table){
-        const query = `SELECT * FROM ${table} WHERE id = ?` ;
+    async get(obj, table){
+
+        let query = `SELECT * FROM ${table} ` ;
+        query += QueryBuilder.where(obj);
         let resultado = new Promise((resolve, reject) => {
-            this.con.query(query, [id], (err,res,fields) => {
+            this.con.query(query, (err,res,fields) => {
             if(err){
                 return reject(err)
             }
@@ -117,9 +137,12 @@ class DB{
      * @return Promise   
      */
     async update(obj, table){
-        const query = `UPDATE ${table} SET ?? WHERE id = ?`;
+        console.log(obj)
+        console.log(table)
+
+        const query = `UPDATE ${table} SET ? WHERE id = ${obj.id}`;
         const promise = new Promise((resolve,reject) => {
-            this.con.query(query, [obj, obj.id], (err,res,fields) => {
+            this.con.query(query, [obj], (err,res,fields) => {
                 if(err){
                     console.error('Hubo error al hacer update');
                     console.error(err);

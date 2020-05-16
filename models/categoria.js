@@ -2,8 +2,11 @@ const Model  = require('./model');
 
 class Categorias extends Model{
     
-    constructor(){
+    constructor({id,nombre,descripcion}){
         super();
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
     
 }

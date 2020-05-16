@@ -7,27 +7,68 @@ class ActividadController{
 
     }
 
-    getAll(req,res){
+    async getAll(req,res){
         let data = ActividadModel.getAll();
-        console.log(data)
         res.send(data);
-        // res.json = 
     }   
 
-    get(req,res){
-        
+    async get(req,res){
+        if(req.query){
+            console.log(req.query)
+        }
+        let id = req.params.actividadId;
+        let data = await ActividadModel.find({id});
+        res.send(data);        
     }
 
-    post(req,res){
+    async post(req,res){
+        if(
+            !Validator.validate(req.body, {
+                id_meta: 'number|required',
+                nombre: 'string|required',
+                descripcion: 'string|required',
+                horas_duracion: 'string|required',
+                repetir_cada_semana: 'number|required',
+                dias_repetir: 'string|required', 
+            })
+        ){
+            return res.send({
+                message: 'bad request'
+            });
+        }
 
+        let actividad = new ActividadModel(req.body);
+        let data = await actividad.save();
+        res.send(data);
     }
 
-    put(req,res){
+    async put(req,res){
+        req.body.id = req.params.actividadId;
+        if(
+            !Validator.validate(req.body, {
+                id: 'number|required',
+                id_meta: 'number|required',
+                nombre: 'string|required',
+                descripcion: 'string|required',
+                horas_duracion: 'date|required',
+                repetir_cada_semana: 'number|required',
+                dias_repetir: 'string|required', 
+            })
+        ){
+            return res.send({
+                message: 'bad request'
+            });
+        }
+        let actividad = new ActividadModel(req.body);
 
+        let data = await actividad.update();
+        return res.send(data);
     }
 
-    delete(req,res){
-
+    async delete(req,res){
+        let id = req.params.actividadId;
+        let response = await ActividadModel.delete(id);
+        return res.send(response);
     }
 }
 

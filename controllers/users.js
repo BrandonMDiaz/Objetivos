@@ -9,7 +9,7 @@ class UsuarioController{
     }
 
     async getAll(req,res){
-        let data = await ObjetivoModel.getAll();
+        let data = await UsuarioModel.getAll();
         res.send(data);
     }   
 
@@ -18,7 +18,7 @@ class UsuarioController{
             console.log(req.query)
         }
         let id = req.params.id;
-        let data = await ObjetivoModel.find(id);
+        let data = await UsuarioModel.find(id);
         res.send(data);
     }
 

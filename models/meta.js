@@ -1,43 +1,15 @@
-const db = require('../db/index')
-class MetaModel{
-    constructor(){
-        this.tableName = 'metas';
-        this.save = this.save.bind(this);
-    }   
-    static tableName(){
-        return 'metas'
-    }
-    static async getAll(){
-        
-        try{
-            console.log(MetaModel.tableName())
-            const data = await db.getAll(MetaModel.tableName());
-            return data;
-        }
-        catch(err){
-            throw err;
-        }
-    }   
+const Model  = require('./model');
 
-    static async find(id){
-        try{
-            const data = await db.get(id, MetaModel.tableName());
-            return data;
-        }
-        catch(err){
-            throw err;
-        }
-    }
-    
-    static async save(obj){
-        try{
-            const data = await db.save(obj, MetaModel.tableName());
-            return data;
-        }
-        catch(err){
-            throw err;
-        }
-    }
+class Meta extends Model{
+    constructor({id, id_objetivo, nombre, descripcion, dias_duracion, numero}){
+        super();
+        this.id = id;
+        this.id_objetivo = id_objetivo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.dias_duracion = dias_duracion;
+        this.numero = numero;
+    }   
 }
 
-module.exports = MetaModel;
+module.exports = Meta;

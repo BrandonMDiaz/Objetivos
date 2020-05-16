@@ -2,10 +2,11 @@ require('./config/.env')
 const express = require('express')
 const bodyParser = require('body-parser')
 const router = require('./routes/index');
+const helmet = require('helmet'); //securing headers
 
 const app = express()
  
-
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(router)

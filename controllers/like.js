@@ -1,15 +1,13 @@
-const {CategoriaModel} = require('../models/index');
+const {LikeModel} = require('../models/index');
 const Validator = require('./validator');
 const Response = require('./responsesController')
 
-class CategoriaController{
+class LikeController{
     constructor(){
-        this.getAll = this.getAll.bind(this);
     }
 
     async getAll(req,res){
-
-        let data = await CategoriaModel.getAll();
+        let data = await LikeModel.getAll();
         res.send(data);
     }   
 
@@ -18,15 +16,15 @@ class CategoriaController{
             console.log(req.query)
         }
         let id = req.params.categoriaId;
-        let data = await CategoriaModel.find({id});
+        let data = await LikeModel.find({id});
         res.send(data);
     }
 
     async post(req,res){
         if(
             !Validator.validate(req.body, {
-                nombre: 'string|required',
-                descripcion: 'string|required',
+                id_usuario: 'number|required',
+                id_objetivo: 'number|required',
             })
         ){
             return res.send({
@@ -34,18 +32,18 @@ class CategoriaController{
             });
         }
 
-        let categoria = new CategoriaModel(req.body);
-        let data = await categoria.save();
+        let like = new LikeModel(req.body);
+        let data = await like.save();
         res.send(data);
     }
 
     async put(req,res){
-        req.body.id = req.params.categoriaId;
+        req.body.id = req.params.likeId;
         if(
             !Validator.validate(req.body, {
                 id: 'number|required',
-                nombre: 'string|required',
-                descripcion: 'string|required',
+                id_usuario: 'number|required',
+                id_objetivo: 'number|required',
             })
         ){
             return res.send({
@@ -53,17 +51,17 @@ class CategoriaController{
             });
         }
 
-        let categoria = new CategoriaModel(req.body);
-        let data = await categoria.update();
+        let like = new LikeModel(req.body);
+        let data = await like.update();
         res.send(data);
 
     }
 
     async delete(req,res){
-        let id = req.params.categoriaId;
-        let response = await CategoriaModel.delete(id);
+        let id = req.params.likeId;
+        let response = await LikeModel.delete(id);
         return res.send(response);
     }
 }
 
-module.exports = new CategoriaController();
+module.exports = new LikeController();

@@ -1,3 +1,9 @@
 exports.actividadController = require('./actividad');
+exports.agendaController = require('./agenda');
+exports.amigoController = require('./amigo');
+exports.categoriaController = require('./categoria');
+exports.likeController = require('./like');
+exports.metaController = require('./meta');
+exports.publicacionController = require('./publicacion');
 exports.objetivoController = require('./objetivo');
 exports.usuarioController = require('./users');

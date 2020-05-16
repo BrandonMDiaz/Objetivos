@@ -9,18 +9,18 @@ router.get('/', actividadController.getAll);
 /**
  * returns one meta
  */
-router.get('/:actividadId');
+router.get('/:actividadId', actividadController.get);
 /**
  * post a meta
  */
-router.post('/');
+router.post('/', actividadController.post);
 /**
  * Edit a meta
  */
-router.put('/:actividadId');
+router.put('/:actividadId', actividadController.put);
 /**
  * delete a meta
  */
-router.delete('/:actividadId');
+router.delete('/:actividadId', actividadController.delete);
 
 module.exports = router;

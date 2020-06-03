@@ -64,9 +64,12 @@ class DB{
     async get(obj, table){
 
         let query = `SELECT * FROM ${table} ` ;
-        query += QueryBuilder.where(obj);
+        let queryObj = QueryBuilder.where(obj);
+        query += queryObj.query;
+        let {dataArray} = queryObj
+
         let resultado = new Promise((resolve, reject) => {
-            this.con.query(query, (err,res,fields) => {
+            this.con.query(query, dataArray, (err,res,fields) => {
             if(err){
                 return reject(err)
             }

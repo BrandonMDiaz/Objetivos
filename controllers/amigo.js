@@ -33,7 +33,7 @@ class AmigoController{
                 message: 'bad request'
             });
         }
-
+        
         let amigo = new AmigoModel(req.body);
         let data = await amigo.save();
         res.send(data);

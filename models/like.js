@@ -1,6 +1,6 @@
 const Model  = require('./model');
 
-class LikeModel extends Model{
+class Laik extends Model{
     constructor({id,id_usuario,id_objetivo}){
         super();
         this.id = id;
@@ -9,4 +9,4 @@ class LikeModel extends Model{
     }
 }
 
-module.exports = LikeModel
+module.exports = Laik

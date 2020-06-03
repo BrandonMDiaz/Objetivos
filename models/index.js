@@ -6,3 +6,8 @@ exports.AgendaModel = require('./agenda')
 exports.CategoriaModel = require('./categoria')
 exports.AmigoModel = require('./amigo')
 exports.PublicacionModel = require('./publicacion')
+exports.CategoriaObjetivoModel = require('./categoria_objetivo')
+exports.ComentarioPublicacionModel = require('./comentario_publicacion')
+exports.LikePublicacionModel = require('./like_publicacion')
+exports.ObjetivoUsuarioModel = require('./objetivo_usuario')
+

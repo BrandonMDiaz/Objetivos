@@ -24,6 +24,8 @@ class PublicacionController{
     }
 
     async post(req,res){
+        let user = req.usuario;
+        req.body.id_usuario = user.id;
         if(
             !Validator.validate(req.body, {
                 id_usuario: 'number|required',
@@ -46,6 +48,9 @@ class PublicacionController{
 
     async put(req,res){
         req.body.id = req.params.publicacionId;
+        if(!req.usuario.id === req.body.id_usuario){
+            return {err:'no puedes editar publicaciones que no son tuyas'}
+        }
         if(
             !Validator.validate(req.body, {
                 id_usuario: 'number|required',

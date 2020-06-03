@@ -1,4 +1,5 @@
 const {Router} = require('express');
+const autenticacion = require('../middlewares/autenticacion')
 
 const user = require('./user');
 const objetivo = require('./objetivo');
@@ -9,7 +10,6 @@ const categoria = require('./categoria');
 const friend = require('./friend');
 const publicacion = require('./publicacion');
 const auth = require('./auth');
-
 
 const router = Router()
 

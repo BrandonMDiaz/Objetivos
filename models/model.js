@@ -11,7 +11,7 @@ class Model{
     static async getAll(){
         let tableName = this.name;
         try{
-            const data = await db.getAll(tableName);
+            let data = await db.getAll(tableName);
             return data;
         }
         catch(err){
@@ -22,7 +22,8 @@ class Model{
     static async find(obj){
         let tableName = this.name;
         try{
-            const data = await db.get(obj, tableName);
+            let data = await db.get(obj, tableName);
+
             return data;
         }
         catch(err){
@@ -34,7 +35,8 @@ class Model{
         let dataToBeSaved = this.getModelData();
         let tableName = this.constructor.name;
         try{
-            const dataSaved = await db.save(dataToBeSaved, tableName);
+            let dataSaved = await db.save(dataToBeSaved, tableName);
+
             return dataSaved;
         }
         catch(err){
@@ -45,7 +47,8 @@ class Model{
         let dataToBeUpdated = this.getModelData();
         let tableName = this.constructor.name;
         try {
-            const dataUpdated = await db.update(dataToBeUpdated, tableName);
+            let dataUpdated = await db.update(dataToBeUpdated, tableName);
+
             return dataUpdated;
         }
         catch(err){
@@ -53,9 +56,9 @@ class Model{
         }
     }
     static async delete(id){
+        let tableName = this.name;
         try{
-            const itemDeleted = await db.delete(id,this.tableName);
-            console.log(itemDeleted);
+            const itemDeleted = await db.delete(id, tableName);
             return true;
         }
         catch(err){

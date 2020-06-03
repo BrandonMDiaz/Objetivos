@@ -2,22 +2,28 @@ const Model  = require('./model');
 const db = require('../db/index')
 
 class Objetivo extends Model{
-    constructor(){
-        super();
+    constructor({id, id_usuario, nombre, descripcion, dias_duracion, publico}){
+        super();    
+        this.id = id;
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.dias_duracion = dias_duracion;
+        this.publico = publico
     }
 
-    static async  getObjetivosActualizados(){
-        try{
-            const tableName = this.name;
-            const query = `SELECT * FROM ${tableName} WHERE id_objetivo = 0`;
-            let result = await db.rawQuery(query);
-            return result; 
-        }
-        catch(err){
-            throw err;
-        }
+    // static async getObjetivosActualizados(){
+    //     try{
+    //         const tableName = this.name;
+    //         const query = `SELECT * FROM ${tableName} WHERE id_objetivo = 0`;
+    //         let result = await db.rawQuery(query);
+    //         return result; 
+    //     }
+    //     catch(err){
+    //         throw err;
+    //     }
        
-    }
+    // }
 
 
     /**

@@ -24,6 +24,7 @@ class MetaController{
     async post(req,res){
         if(
             !Validator.validate(req.body, {
+                id_usuario: 'number|required',
                 id_objetivo: 'number|required',
                 nombre: 'string|required',
                 descripcion: 'string|required',
@@ -45,6 +46,7 @@ class MetaController{
         req.body.id = req.params.metaId;
         if(
             !Validator.validate(req.body, {
+                id_usuario: 'number|required',
                 id_objetivo: 'number|required',
                 nombre: 'string|required',
                 descripcion: 'string|required',

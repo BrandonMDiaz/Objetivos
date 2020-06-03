@@ -9,7 +9,7 @@ class ObjetivoController{
 
     async getAll(req,res){
 
-        let data = await ObjetivoModel.getObjetivosActualizados();
+        let data = await ObjetivoModel.getAll();
         // let data = await ObjetivoModel.getAll();
         res.send(data);
     }   
@@ -24,12 +24,19 @@ class ObjetivoController{
     }
 
     async post(req,res){
+        let usuario = req.usuario[0];
+        console.log(req.body);
+
+        //agregar id del usuario
+        req.body.id_usuario = usuario.id;
+        req.body.publico = 0;
+        console.log(req.body);
+
         if(
             !Validator.validate(req.body, {
                 id_usuario: 'number|required',
-                id_objetivo: 'number',
                 nombre: 'string|required',
-                descripcion: 'descripcion',
+                descripcion: 'string',
                 dias_duracion: 'number|required',
                 publico: 'number|required', 
             })
@@ -39,13 +46,7 @@ class ObjetivoController{
             });
         }
 
-        let objetivo = new ObjetivoModel();
-        objetivo.id_usuario = req.body.id_usuario;
-        objetivo.id_objetivo = req.body.id_objetivo;
-        objetivo.nombre = req.body.nombre;
-        objetivo.descripcion = req.body.descripcion;
-        objetivo.dias_duracion = req.body.dias_duracion;
-        objetivo.publico = req.body.publico;
+        let objetivo = new ObjetivoModel(req.body);
 
         let data = await objetivo.save();
         res.send(data);
@@ -53,6 +54,9 @@ class ObjetivoController{
 
     async put(req,res){
         req.body.id = req.params.objetivoId;
+        if(req.body.publico === 1){
+            
+        }
         if(
             !Validator.validate(req.body, {
                 id: 'number|required',
@@ -69,30 +73,23 @@ class ObjetivoController{
             });
         }
 
-        let objetivo = new ObjetivoModel();
-        objetivo.id = req.params.objetivoId;
-        objetivo.id_usuario = req.body.id_usuario;
-        objetivo.id_objetivo = req.body.id_objetivo;
-        objetivo.nombre = req.body.nombre;
-        objetivo.descripcion = req.body.descripcion;
-        objetivo.dias_duracion = req.body.dias_duracion;
-        objetivo.publico = req.body.publico;
+        let objetivo = new ObjetivoModel(req.body);
 
 
-        if(!ObjetivoModel.checkUpdate(req.body.id)){
+        // if(!ObjetivoModel.checkUpdate(req.body.id)){
                 
-            //el nuevo objetivo hacemos que su id_objetivo apunte a 0
-            objetivo.id_objetivo = 0;
-            //eliminamos el id del objetivo que se nos dio
-            delete objetivo.id
-            //guardamos el nuevo objetivo
-            let data = await objetivo.save();
-            //editamos el objetivo anterior para que apunte al nuevo
-            objetivo.id = req.params.objetivoId;
-            objetivo.id_objetivo = data.id;
-            await objetivo.update();
-            return res.send(data);
-        }        
+        //     //el nuevo objetivo hacemos que su id_objetivo apunte a 0
+        //     objetivo.id_objetivo = 0;
+        //     //eliminamos el id del objetivo que se nos dio
+        //     delete objetivo.id
+        //     //guardamos el nuevo objetivo
+        //     let data = await objetivo.save();
+        //     //editamos el objetivo anterior para que apunte al nuevo
+        //     objetivo.id = req.params.objetivoId;
+        //     objetivo.id_objetivo = data.id;
+        //     await objetivo.update();
+        //     return res.send(data);
+        // }        
 
         let data = await objetivo.update();
         return res.send(data);

@@ -7,3 +7,5 @@ exports.metaController = require('./meta');
 exports.publicacionController = require('./publicacion');
 exports.objetivoController = require('./objetivo');
 exports.usuarioController = require('./users');
+exports.loginController = require('./auth/login');
+exports.registerController = require('./auth/register');

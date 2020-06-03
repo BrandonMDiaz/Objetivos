@@ -1,6 +1,7 @@
 const {UsuarioModel} = require('../models/index');
 const Validator = require('./validator');
 const Response = require('./responsesController')
+const bcrypt = require('bcrypt');
 
 
 class UsuarioController{
@@ -37,13 +38,9 @@ class UsuarioController{
             });
         }
         
-        let usuario = new UsuarioModel();
-        usuario.name = req.body.name;
-        usuario.last_name = req.body.last_name;
-        usuario.email = req.body.email;
-        usuario.username = req.body.username;
-        usuario.password = req.body.password;
-
+        req.body.password = bcrypt.hashSync(req.body.password,10);
+        console.log(req.body);
+        let usuario = new UsuarioModel(req.body);
         let data = await usuario.save();
         res.send(data);
     }

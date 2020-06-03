@@ -8,7 +8,8 @@ class ActividadController{
     }
 
     async getAll(req,res){
-        let data = ActividadModel.getAll();
+        let data = await ActividadModel.getAll();
+        console.log(data)
         res.send(data);
     }   
 
@@ -22,8 +23,10 @@ class ActividadController{
     }
 
     async post(req,res){
+        
         if(
             !Validator.validate(req.body, {
+                id_usuario: 'number|required',
                 id_meta: 'number|required',
                 nombre: 'string|required',
                 descripcion: 'string|required',
@@ -47,6 +50,7 @@ class ActividadController{
         if(
             !Validator.validate(req.body, {
                 id: 'number|required',
+                id_usuario: 'number|required',
                 id_meta: 'number|required',
                 nombre: 'string|required',
                 descripcion: 'string|required',

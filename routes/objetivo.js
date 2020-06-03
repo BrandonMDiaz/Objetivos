@@ -1,11 +1,13 @@
 const {Router} = require('express');
-const {objetivoController} = require('../controllers/index')
+const {objetivoController} = require('../controllers/index');
+const Auth = require('../middlewares/autenticacion');
+
 const router = Router();
 
-router.get('/', objetivoController.getAll);
-router.get('/:objetivoId', objetivoController.get);
-router.post('/', objetivoController.post);
-router.put('/:objetivoId', objetivoController.put);
-router.delete('/:objetivoId', objetivoController.delete);
+router.get('/', [Auth.VerificaToken], objetivoController.getAll);
+router.get('/:objetivoId', [Auth.VerificaToken],objetivoController.get);
+router.post('/', [Auth.VerificaToken],objetivoController.post);
+router.put('/:objetivoId', [Auth.VerificaToken],objetivoController.put);
+router.delete('/:objetivoId', [Auth.VerificaToken],objetivoController.delete);
 
 module.exports = router;
